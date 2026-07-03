@@ -13,7 +13,7 @@ snapshot_download(
 # PASTE YOUR DIRECT GOOGLE DRIVE LINKS HERE
 # ---------------------------------------------------------
 FAISS_URL = "https://docs.google.com/uc?export=download&id=1RQ88p02NWUNOA2n5K7ANpI0_67L5-QGN&confirm=t"
-METADATA_URL = "https://docs.google.com/uc?export=download&id=1mXpCWq3iowWvfEC9eu6ZTPxnGNJYRSm1&confirm=t""
+METADATA_URL = "https://docs.google.com/uc?export=download&id=1mXpCWq3iowWvfEC9eu6ZTPxnGNJYRSm1&confirm=t"
 
 # 3. Auto-download index file if missing on the server
 if not os.path.exists("data/index.faiss"):
