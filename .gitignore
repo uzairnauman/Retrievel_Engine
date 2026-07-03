@@ -1,0 +1,6 @@
+env/
+models/
+data/index.faiss
+data/metadata.pkl
+.DS_Store
+Thumbs.db
