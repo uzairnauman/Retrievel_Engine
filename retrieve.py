@@ -17,8 +17,8 @@ os.makedirs("data", exist_ok=True)
 # ---------------------------------------------------------
 # GOOGLE DRIVE FILE IDS
 # ---------------------------------------------------------
-FAISS_ID = "1mXpCWq3iowWvfEC9eu6ZTPxnGNJYRSm1"
-METADATA_ID = "1RQ88p02NWUNOA2n5K7ANpI0_67L5-QGN"
+FAISS_ID = "1RQ88p02NWUNOA2n5K7ANpI0_67L5-QGN"
+METADATA_ID = "1mXpCWq3iowWvfEC9eu6ZTPxnGNJYRSm1"
 
 # FORCE CLEAN: Kill any broken files sitting in the cache completely
 for filename in ["index.faiss", "metadata.pkl"]:
