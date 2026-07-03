@@ -10,6 +10,8 @@ snapshot_download(
     local_dir="models/bge"
 )
 
+os.makedirs("data", exist_ok=True)
+
 # PASTE YOUR DIRECT GOOGLE DRIVE LINKS HERE
 # ---------------------------------------------------------
 FAISS_URL = "https://docs.google.com/uc?export=download&id=1RQ88p02NWUNOA2n5K7ANpI0_67L5-QGN&confirm=t"
