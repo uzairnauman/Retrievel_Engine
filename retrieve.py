@@ -9,6 +9,21 @@ snapshot_download(
     local_dir="models/bge"
 )
 
+# PASTE YOUR DIRECT GOOGLE DRIVE LINKS HERE
+# ---------------------------------------------------------
+FAISS_URL = "https://drive.google.com/file/d/1RQ88p02NWUNOA2n5K7ANpI0_67L5-QGN/view?usp=sharing"
+METADATA_URL = "https://drive.google.com/file/d/1mXpCWq3iowWvfEC9eu6ZTPxnGNJYRSm1/view?usp=sharing"
+
+# 3. Auto-download index file if missing on the server
+if not os.path.exists("data/index.faiss"):
+    print("Downloading FAISS index from Google Drive...")
+    urllib.request.urlretrieve(FAISS_URL, "data/index.faiss")
+
+# 4. Auto-download metadata file if missing on the server
+if not os.path.exists("data/metadata.pkl"):
+    print("Downloading metadata from Google Drive...")
+    urllib.request.urlretrieve(METADATA_URL, "data/metadata.pkl")
+
 # -------------------------
 # Load FAISS index
 # -------------------------
