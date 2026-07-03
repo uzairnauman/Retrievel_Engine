@@ -2,30 +2,37 @@ import pickle
 import faiss
 from sentence_transformers import SentenceTransformer
 import os
+import gdown
 from huggingface_hub import snapshot_download
-import urllib.request
 
+# 1. Download the embedding model from Hugging Face
 snapshot_download(
     repo_id="BAAI/bge-small-en-v1.5",
     local_dir="models/bge"
 )
 
+# 2. Ensure the local data directory exists on the server!
 os.makedirs("data", exist_ok=True)
 
-# PASTE YOUR DIRECT GOOGLE DRIVE LINKS HERE
 # ---------------------------------------------------------
-FAISS_URL = "https://docs.google.com/uc?export=download&id=1RQ88p02NWUNOA2n5K7ANpI0_67L5-QGN&confirm=t"
-METADATA_URL = "https://docs.google.com/uc?export=download&id=1mXpCWq3iowWvfEC9eu6ZTPxnGNJYRSm1&confirm=t"
+# GOOGLE DRIVE FILE IDS
+# ---------------------------------------------------------
+FAISS_ID = "1mXpCWq3iowWvfEC9eu6ZTPxnGNJYRSm1"
+METADATA_ID = "1RQ88p02NWUNOA2n5K7ANpI0_67L5-QGN"
 
-# 3. Auto-download index file if missing on the server
-if not os.path.exists("data/index.faiss"):
-    print("Downloading FAISS index from Google Drive...")
-    urllib.request.urlretrieve(FAISS_URL, "data/index.faiss")
+# FORCE CLEAN: Kill any broken files sitting in the cache completely
+for filename in ["index.faiss", "metadata.pkl"]:
+    filepath = os.path.join("data", filename)
+    if os.path.exists(filepath):
+        print(f"Purging cached copy of {filename} to ensure fresh download...")
+        os.remove(filepath)
 
-# 4. Auto-download metadata file if missing on the server
-if not os.path.exists("data/metadata.pkl"):
-    print("Downloading metadata from Google Drive...")
-    urllib.request.urlretrieve(METADATA_URL, "data/metadata.pkl")
+# 3. Download files cleanly via gdown
+print("Downloading FAISS index from Google Drive via gdown...")
+gdown.download(id=FAISS_ID, output="data/index.faiss", quiet=False)
+
+print("Downloading metadata from Google Drive via gdown...")
+gdown.download(id=METADATA_ID, output="data/metadata.pkl", quiet=False)
 
 # -------------------------
 # Load FAISS index
@@ -44,7 +51,6 @@ with open("data/metadata.pkl", "rb") as f:
 model = SentenceTransformer(
     "models/bge"
 )
-
 
 def search(query, k=5):
     # Create embedding for the query
