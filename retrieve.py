@@ -3,6 +3,7 @@ import faiss
 from sentence_transformers import SentenceTransformer
 import os
 from huggingface_hub import snapshot_download
+import urllib.request
 
 snapshot_download(
     repo_id="BAAI/bge-small-en-v1.5",
